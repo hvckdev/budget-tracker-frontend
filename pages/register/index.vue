@@ -1,23 +1,44 @@
+<script setup>
+import useAuth from '~/composables/useAuth';
+
+const { register } = useAuth();
+</script>
 <template>
   <div>
     <div class="card">
       <div class="card-header">Registration</div>
       <div class="card-body">
-        <form>
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username">
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password">
-          </div>
-          <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirm password</label>
-            <input type="password" class="form-control" id="password_confirmation">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <FormKit
+            type="form"
+            @submit="register"
+            :submit-attrs="{
+              inputClass: 'btn btn-primary mt-3'
+            }"
+        >
+          <FormKit
+              type="text"
+              name="username"
+              id="username"
+              validation="required|length:4,16"
+              label="Username"
+              help="your nickname or smth"
+              placeholder="Please add username"
+              label-class="form-label"
+              input-class="form-control"
+              help-class="form-text"
+          />
+
+          <FormKit
+              type="password"
+              name="password"
+              label="Password"
+              help="Enter a new password"
+              validation="required"
+              label-class="form-label"
+              input-class="form-control"
+              help-class="form-text"
+          />
+        </FormKit>
       </div>
     </div>
   </div>
