@@ -1,18 +1,14 @@
-import { useCookie } from '#app';
+import { navigateTo, useCookie } from '#app';
 import { ref } from 'vue';
 import { useToast } from 'vue-toastification';
-import useUser from '~/composables/useUser';
 
 export default function useAuth() {
   const error = ref(null);
   const { $api } = useNuxtApp();
+  const toast = useToast();
 
   const login = async (data) => {
     const token = useCookie('token');
-    const toast = useToast();
-    const router = useRouter();
-
-    const { fetchUser } = useUser();
 
     try {
       const response = await $api('api/login_check', {
@@ -22,23 +18,29 @@ export default function useAuth() {
 
       token.value = response.token;
 
-      await fetchUser();
-
       toast.success('Successfully logged in.');
 
-      router.push('/');
+      // window location cuz of reload nuxt
+      // todo: find a better way to reload cookie
+      window.location = '/';
     } catch (e) {
-      toast.success(e.data.message);
+      toast.error(e.data.detail);
     }
   };
 
-  const register = (data) => {
-    $api('api/registration', {
-      method: 'POST',
-      body: data,
-    }).then(() => {
-      window.location = '/login';
-    });
+  const register = async (data) => {
+    try {
+      await $api('api/registration', {
+        method: 'POST',
+        body: data,
+      });
+
+      toast.success('Successfully registered! ✨');
+
+      navigateTo('/login');
+    } catch (e) {
+      toast.error(e.data.detail);
+    }
   };
 
   return {

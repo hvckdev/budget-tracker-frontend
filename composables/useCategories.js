@@ -1,8 +1,8 @@
 import { useToast } from 'vue-toastification';
+import { navigateTo } from '#app';
 
 export default function useCategories() {
   const { $api } = useNuxtApp();
-  const router = useRouter();
 
   const toast = useToast();
 
@@ -21,7 +21,7 @@ export default function useCategories() {
 
       toast.success('Successfully created a category 😍');
 
-      router.push('/categories');
+      navigateTo('/categories');
     } catch (e) {
       toast.error(e.data.message);
     }
@@ -36,7 +36,7 @@ export default function useCategories() {
 
       toast.success('Successfully edited a category 😍');
 
-      router.push('/categories');
+      navigateTo('/categories');
     } catch (e) {
       toast.error(e);
     }

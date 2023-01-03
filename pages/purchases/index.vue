@@ -17,7 +17,8 @@
           <th>#</th>
           <th>name</th>
           <th>date</th>
-          <th></th>
+          <th>amount</th>
+          <th class="text-end">actions</th>
         </tr>
         </thead>
       </table>
