@@ -7,9 +7,9 @@ export default function useCategories() {
   const toast = useToast();
 
   const getCategories = async () => {
-    const { categories } = await $api('/api/category');
+    const { data } = await $api('/api/category');
 
-    return categories;
+    return data;
   };
 
   const storeCategory = async (values) => {
@@ -44,7 +44,9 @@ export default function useCategories() {
 
   const getCategory = async (category) => {
     try {
-      return await $api(`/api/category/${category}`);
+      const { data } = await $api(`/api/category/${category}`);
+
+      return data;
     } catch (e) {
       toast.error(e.data.detail);
     }
