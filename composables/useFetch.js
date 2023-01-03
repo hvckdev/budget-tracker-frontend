@@ -15,8 +15,5 @@ export default function useFetchBackend(url, options) {
     };
   }
 
-  return useFetch(url, {
-    baseURL: runtimeConfig.public.apiBase,
-    ...customOptions,
-  });
+  return useFetch(url, customOptions);
 }
