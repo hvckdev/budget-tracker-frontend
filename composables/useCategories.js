@@ -1,5 +1,3 @@
-import useFetchBackend from '~/composables/useFetch';
-
 export default function useCategories() {
   const { $api } = useNuxtApp();
 

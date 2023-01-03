@@ -1,12 +1,12 @@
-import useFetchBackend from '~/composables/useFetch';
 import { useCookie } from '#app';
 import { ref } from 'vue';
 
 export default function useAuth() {
   const error = ref(null);
+  const { $api } = useNuxtApp();
 
   const login = async (data) => {
-    const response = await useFetchBackend('api/login_check', {
+    const response = await $api('api/login_check', {
       method: 'post',
       body: data,
     });
@@ -23,7 +23,7 @@ export default function useAuth() {
   };
 
   const register = (data) => {
-    useFetchBackend('api/registration', {
+    $api('api/registration', {
       method: 'POST',
       body: data,
     }).then(() => {
