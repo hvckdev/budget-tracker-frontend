@@ -1,3 +1,12 @@
+<script setup>
+import useCategories from '~/composables/useCategories';
+
+const { getCategories } = useCategories();
+
+const categories = ref(null);
+
+onMounted(async () => categories.value = await getCategories());
+</script>
 <template>
   <div class="card">
     <div class="card-header">
@@ -19,6 +28,13 @@
           <th></th>
         </tr>
         </thead>
+        <tbody>
+        <tr v-for="category in categories">
+          <th>{{ category.id }}</th>
+          <th>{{ category.name }}</th>
+          <th />
+        </tr>
+        </tbody>
       </table>
     </div>
     <div class="card-footer d-flex justify-content-center">

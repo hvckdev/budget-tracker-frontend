@@ -1,22 +1,21 @@
-import useFetchBackend from '~/composables/useFetch';
-
 export default function useUser() {
   const fetchUser = async () => {
     const token = useCookie('token');
+    const { $api } = useNuxtApp();
 
     if (token) {
       const user = useState('user');
 
       if (!user.value) {
-        const { data, error } = await useFetchBackend('api/user');
+        try {
+          const response = await $api('api/user');
 
-        if (error.value) {
-          return;
+          user.value = response;
+
+          return user.value;
+        } catch (e) {
+          // todo: handle
         }
-
-        user.value = data.value;
-
-        return user.value;
       }
     }
   };
