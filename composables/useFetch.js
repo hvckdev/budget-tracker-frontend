@@ -11,12 +11,12 @@ export default function useFetchBackend(url, options) {
 
   if (token.value) {
     customOptions.headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.value}`,
     };
   }
 
   return useFetch(url, {
     baseURL: runtimeConfig.public.apiBase,
-    ...options,
+    ...customOptions,
   });
 }

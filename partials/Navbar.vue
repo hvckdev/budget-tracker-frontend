@@ -1,3 +1,7 @@
+<script setup>
+const user = useState('user');
+</script>
+
 <template>
   <div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -14,7 +18,7 @@
             </li>
           </ul>
           <div class="d-flex">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul v-if="!user" class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <NuxtLink to="login" class="nav-link">Login</NuxtLink>
               </li>
@@ -22,6 +26,9 @@
                 <NuxtLink to="register" class="nav-link">Register</NuxtLink>
               </li>
             </ul>
+            <div v-else>
+              <span>{{ user.username }}</span>
+            </div>
           </div>
         </div>
       </div>
