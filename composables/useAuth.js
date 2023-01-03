@@ -1,25 +1,35 @@
 import { useCookie } from '#app';
 import { ref } from 'vue';
+import { useToast } from 'vue-toastification';
+import useUser from '~/composables/useUser';
 
 export default function useAuth() {
   const error = ref(null);
   const { $api } = useNuxtApp();
 
   const login = async (data) => {
-    const response = await $api('api/login_check', {
-      method: 'post',
-      body: data,
-    });
-
-    if (response.error.value) {
-      error.value = response.error.value.response._data.message;
-
-      return;
-    }
-
     const token = useCookie('token');
+    const toast = useToast();
+    const router = useRouter();
 
-    token.value = response.data.value.token;
+    const { fetchUser } = useUser();
+
+    try {
+      const response = await $api('api/login_check', {
+        method: 'post',
+        body: data,
+      });
+
+      token.value = response.token;
+
+      await fetchUser();
+
+      toast.success('Successfully logged in.');
+
+      router.push('/');
+    } catch (e) {
+      toast.success(e.data.message);
+    }
   };
 
   const register = (data) => {

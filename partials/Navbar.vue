@@ -1,5 +1,5 @@
 <script setup>
-const user = useState('user');
+const user = computed(() => useState('user'));
 </script>
 
 <template>
@@ -16,15 +16,15 @@ const user = useState('user');
             <li class="nav-item">
               <NuxtLink to="/" class="nav-link">⛺️ Home</NuxtLink>
             </li>
-            <li class="nav-item">
+            <li v-if="user.value" class="nav-item">
               <NuxtLink to="/purchases" class="nav-link">📦 Purchases</NuxtLink>
             </li>
-            <li class="nav-item">
+            <li v-if="user.value" class="nav-item">
               <NuxtLink to="/categories" class="nav-link">📔 Categories</NuxtLink>
             </li>
           </ul>
           <div class="d-flex">
-            <ul v-if="!user" class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul v-if="!user.value" class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <NuxtLink to="login" class="nav-link">Login</NuxtLink>
               </li>
@@ -33,7 +33,7 @@ const user = useState('user');
               </li>
             </ul>
             <div v-else>
-              <span>{{ user.username }}</span>
+              <span>{{ user.value.username }}</span>
             </div>
           </div>
         </div>

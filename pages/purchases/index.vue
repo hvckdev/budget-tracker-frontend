@@ -16,6 +16,7 @@
         <tr>
           <th>#</th>
           <th>name</th>
+          <th>date</th>
           <th></th>
         </tr>
         </thead>

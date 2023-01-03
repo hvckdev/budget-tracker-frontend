@@ -1,11 +1,17 @@
 <script setup>
 import useCategories from '~/composables/useCategories';
 
-const { getCategories } = useCategories();
+const { getCategories, destroyCategory } = useCategories();
 
 const categories = ref(null);
 
 onMounted(async () => categories.value = await getCategories());
+
+const destroyCategoryThenRefresh = async (category) => {
+  await destroyCategory(category);
+
+  categories.value = await getCategories();
+};
 </script>
 <template>
   <div class="card">
@@ -13,7 +19,7 @@ onMounted(async () => categories.value = await getCategories());
       <span class="h3">📔 Your categories</span>
 
       <NuxtLink
-          to="/purchases/create"
+          to="/categories/create"
           class="btn btn-primary float-end"
       >
         ➕ Create
@@ -25,14 +31,29 @@ onMounted(async () => categories.value = await getCategories());
         <tr>
           <th>#</th>
           <th>name</th>
-          <th></th>
+          <th class="text-end">actions</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="category in categories">
           <th>{{ category.id }}</th>
-          <th>{{ category.name }}</th>
-          <th />
+          <td>{{ category.name }}</td>
+          <td>
+            <div class="btn-group float-end">
+              <NuxtLink
+                  :to="`/categories/${category.id}/edit`"
+                  class="btn btn-primary"
+              >
+                Edit
+              </NuxtLink>
+              <button
+                  class="btn btn-danger"
+                  @click="destroyCategoryThenRefresh(category.id)"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>

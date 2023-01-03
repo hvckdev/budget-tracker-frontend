@@ -2,6 +2,8 @@
 import useAuth from '~/composables/useAuth';
 
 const { error, login } = useAuth();
+
+const user = computed(() => useState('user'));
 </script>
 
 <template>
@@ -9,7 +11,7 @@ const { error, login } = useAuth();
     <div v-if="error" class="alert alert-danger">
       {{ error }}
     </div>
-    <div class="card">
+    <div v-if="!user.value" class="card">
       <div class="card-header">Login</div>
       <div class="card-body">
         <FormKit
