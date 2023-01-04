@@ -1,3 +1,12 @@
+<script setup>
+import usePurchases from '~/composables/usePurchases';
+
+const purchases = ref([]);
+
+const { getPurchases } = usePurchases();
+
+onMounted(async () => purchases.value = await getPurchases());
+</script>
 <template>
   <div class="card">
     <div class="card-header">
@@ -21,6 +30,15 @@
           <th class="text-end">actions</th>
         </tr>
         </thead>
+        <tbody>
+        <tr v-for="purchase in purchases">
+          <th>{{ purchase.id }}</th>
+          <td>{{ purchase.name || '-' }}</td>
+          <td>{{ purchase.created_at }}</td>
+          <td>{{ purchase.amount }}</td>
+          <td>smth</td>
+        </tr>
+        </tbody>
       </table>
     </div>
     <div class="card-footer d-flex justify-content-center">

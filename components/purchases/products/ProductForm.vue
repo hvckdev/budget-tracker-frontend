@@ -2,12 +2,23 @@
 import useCategories from '~/composables/useCategories';
 
 const categories = ref(null);
+const product = reactive({
+  name: null,
+  category: null,
+  price: null,
+});
 
 const { getCategories } = useCategories();
 
+const emit = defineEmits(['input']);
+
 onMounted(async () => {
-  categories.value = (await getCategories());
+  categories.value = await getCategories();
 });
+
+watch(product, (newProduct) => {
+  emit('input', newProduct);
+}, { deep: true });
 
 </script>
 
@@ -18,6 +29,7 @@ onMounted(async () => {
           type="text"
           name="name"
           id="name"
+          v-model="product.name"
           validation="required|length:4,16"
           label="Name of product"
           label-class="form-label"
@@ -29,8 +41,10 @@ onMounted(async () => {
       <FormKit
           type="select"
           name="category"
-          id="name"
+          id="category"
+          v-model="product.category"
           label="Category"
+          placeholder="Select a category"
           label-class="form-label"
           input-class="form-select"
           help-class="form-text"
@@ -41,8 +55,9 @@ onMounted(async () => {
     <div class="col">
       <FormKit
           type="number"
-          name="name"
-          id="name"
+          name="price"
+          id="price"
+          v-model="product.price"
           validation="required"
           label="Price (RUB)"
           label-class="form-label"

@@ -8,7 +8,7 @@ export default function useUser() {
 
       if (!user.value) {
         try {
-          user.value = await $api('api/user');
+          user.value = await $api('user');
 
           return user.value;
         } catch (e) {

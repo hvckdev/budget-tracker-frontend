@@ -20,6 +20,7 @@
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.45",
+    "vue-demi": "^0.13.11",
     "vue-toastification": "^2.0.0-rc.5"
   }
 }

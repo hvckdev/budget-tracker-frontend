@@ -11,7 +11,7 @@ export default function useAuth() {
     const token = useCookie('token');
 
     try {
-      const response = await $api('api/login_check', {
+      const response = await $api('login_check', {
         method: 'post',
         body: data,
       });
@@ -24,13 +24,13 @@ export default function useAuth() {
       // todo: find a better way to reload cookie
       window.location = '/';
     } catch (e) {
-      toast.error(e.data.detail);
+      toast.error(e.data.message);
     }
   };
 
   const register = async (data) => {
     try {
-      await $api('api/registration', {
+      await $api('registration', {
         method: 'POST',
         body: data,
       });

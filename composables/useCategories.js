@@ -7,59 +7,46 @@ export default function useCategories() {
   const toast = useToast();
 
   const getCategories = async () => {
-    const { data } = await $api('/api/category');
+
+    const { data } = await $api('category');
 
     return data;
   };
 
   const storeCategory = async (values) => {
-    try {
-      await $api('/api/category', {
-        method: 'post',
-        body: values,
-      });
+    await $api('category', {
+      method: 'post',
+      body: values,
+    });
 
-      toast.success('Successfully created a category 😍');
+    toast.success('Successfully created a category 😍');
 
-      navigateTo('/categories');
-    } catch (e) {
-      toast.error(e.data.message);
-    }
+    navigateTo('/categories');
   };
 
   const editCategory = async (category, values) => {
-    try {
-      await $api(`/api/category/${category}`, {
-        method: 'put',
-        body: values,
-      });
+    await $api(`category/${category}`, {
+      method: 'put',
+      body: values,
+    });
 
-      toast.success('Successfully edited a category 😍');
+    toast.success('Successfully edited a category 😍');
 
-      navigateTo('/categories');
-    } catch (e) {
-      toast.error(e);
-    }
+    navigateTo('/categories');
   };
 
   const getCategory = async (category) => {
-    try {
-      const { data } = await $api(`/api/category/${category}`);
+    const { data } = await $api(`category/${category}`);
 
-      return data;
-    } catch (e) {
-      toast.error(e.data.detail);
-    }
+    return data;
   };
 
   const destroyCategory = async (category) => {
-    try {
-      await $api(`/api/category/${category}`, {
-        method: 'delete',
-      });
-    } catch (e) {
-      toast.error(e.data.detail);
-    }
+    await $api(`category/${category}`, {
+      method: 'delete',
+    });
+
+    toast.success('Successfully deleted category! 🔥');
   };
 
   return {

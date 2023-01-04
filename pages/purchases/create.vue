@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import Form from "~/components/purchases/Form.vue";
+import { usePurchases } from "#imports";
+
+const { storePurchase } = usePurchases();
 </script>
 
 <template>
@@ -8,7 +11,7 @@ import Form from "~/components/purchases/Form.vue";
       <span class="h3">Create purchase</span>
     </div>
     <div class="card-body">
-      <Form />
+      <Form @submit="storePurchase" />
     </div>
   </div>
 </template>
