@@ -14,22 +14,22 @@ const user = computed(() => useState('user'));
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <NuxtLink to="/" class="nav-link">⛺️ Home</NuxtLink>
+              <NuxtLink active-class="active" to="/" class="nav-link">⛺️ Home</NuxtLink>
             </li>
             <li v-if="user.value" class="nav-item">
-              <NuxtLink to="/purchases" class="nav-link">📦 Purchases</NuxtLink>
+              <NuxtLink active-class="active" to="/purchases" class="nav-link">📦 Purchases</NuxtLink>
             </li>
             <li v-if="user.value" class="nav-item">
-              <NuxtLink to="/categories" class="nav-link">📔 Categories</NuxtLink>
+              <NuxtLink active-class="active" to="/categories" class="nav-link">📔 Categories</NuxtLink>
             </li>
           </ul>
           <div class="d-flex">
             <ul v-if="!user.value" class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <NuxtLink to="login" class="nav-link">Login</NuxtLink>
+                <NuxtLink active-class="active" to="login" class="nav-link">Login</NuxtLink>
               </li>
               <li class="nav-item">
-                <NuxtLink to="register" class="nav-link">Register</NuxtLink>
+                <NuxtLink active-class="active" to="register" class="nav-link">Register</NuxtLink>
               </li>
             </ul>
             <div v-else>

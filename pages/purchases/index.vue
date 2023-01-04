@@ -1,11 +1,22 @@
 <script setup>
 import usePurchases from '~/composables/usePurchases';
+import moment from 'moment';
 
 const purchases = ref([]);
 
-const { getPurchases } = usePurchases();
+const { getPurchases, destroyPurchase } = usePurchases();
 
 onMounted(async () => purchases.value = await getPurchases());
+
+const destroyPurchaseThenRefresh = async (purchase) => {
+  await destroyPurchase(purchase);
+
+  purchases.value = await getPurchases();
+};
+
+const formatDate = (date) => {
+  return moment(date).format('Do MMMM YYYY');
+};
 </script>
 <template>
   <div class="card">
@@ -33,10 +44,23 @@ onMounted(async () => purchases.value = await getPurchases());
         <tbody>
         <tr v-for="purchase in purchases">
           <th>{{ purchase.id }}</th>
-          <td>{{ purchase.name || '-' }}</td>
-          <td>{{ purchase.created_at }}</td>
-          <td>{{ purchase.amount }}</td>
-          <td>smth</td>
+          <td>
+            <NuxtLink :to="`/purchases/${purchase.id}`" class="">
+              {{ purchase.name || '-' }}
+            </NuxtLink>
+          </td>
+          <td>{{ formatDate(purchase.created_at) }}</td>
+          <td>{{ purchase.amount }} RUB</td>
+          <td class="d-flex justify-content-end">
+            <div class="btn-group">
+              <NuxtLink :to="`/purchases/${purchase.id}/edit`" class="btn btn-primary">
+                Edit
+              </NuxtLink>
+              <button @click="destroyPurchaseThenRefresh(purchase.id)" class="btn btn-danger">
+                Delete
+              </button>
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>

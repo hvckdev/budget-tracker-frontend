@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Form from "~/components/purchases/Form.vue";
+
 import { usePurchases } from "#imports";
 
 const { storePurchase } = usePurchases();

@@ -1,18 +1,31 @@
 <script setup>
 import useCategories from '~/composables/useCategories';
 
+const { getCategories } = useCategories();
+
+const emit = defineEmits(['input']);
+const { value } = defineProps({
+  value: {
+    type: Object,
+    default: () => {},
+  },
+});
+
 const categories = ref(null);
+
 const product = reactive({
   name: null,
   category: null,
   price: null,
 });
 
-const { getCategories } = useCategories();
-
-const emit = defineEmits(['input']);
-
 onMounted(async () => {
+  if (value) {
+    product.name = value.name;
+    product.category = value.category;
+    product.price = value.price;
+  }
+
   categories.value = await getCategories();
 });
 

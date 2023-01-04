@@ -22,7 +22,7 @@ defineProps({
           type="text"
           name="name"
           id="name"
-          validation="required|length:4,16"
+          validation="required|length:4,64"
           label="Name"
           label-class="form-label"
           input-class="form-control"
