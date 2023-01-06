@@ -11,7 +11,7 @@ export default function useAuth() {
     const token = useCookie('token');
 
     try {
-      const response = await $api('login_check', {
+      const response = await $api('login', {
         method: 'post',
         body: data,
       });
