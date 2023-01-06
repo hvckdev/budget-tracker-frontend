@@ -23,20 +23,20 @@ const formatDate = (date) => {
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <p class="h5">About</p>
+            <p class="h5">📃 About</p>
             <p>
-              Amount:
+              💵 Amount:
               <strong>{{ purchase.amount }} RUB</strong>
             </p>
-            <p>Made: {{ formatDate(purchase.created_at) }}</p>
+            <p>📅 Made: {{ formatDate(purchase.created_at) }}</p>
           </div>
           <div class="col">
-            <p class="h5">Products</p>
+            <p class="h5">🛍️ Products</p>
             <ul class="list-group">
               <li class="list-group-item" v-for="product in purchase.products">
-                <p>Name: {{ product.name }}</p>
-                <p>Price: {{ product.price }} RUB</p>
-                <p>Category: {{ product.categoryResource.name }}</p>
+                <p>🪧 Name: {{ product.name }}</p>
+                <p>💵 Price: {{ product.price }} RUB</p>
+                <p>🗂️ Category: {{ product.categoryResource.name }}</p>
               </li>
             </ul>
           </div>
