@@ -2,7 +2,7 @@
 import Form from '~/components/purchases/Form.vue';
 import usePurchases from '~/composables/usePurchases';
 
-const { getPurchase } = usePurchases();
+const { getPurchase, updatePurchase } = usePurchases();
 const { params } = useRoute();
 
 const purchase = ref(null);
@@ -18,7 +18,7 @@ onMounted(async () => {
       <span class="h3">Edit purchase</span>
     </div>
     <div class="card-body">
-      <Form v-if="purchase" :purchase="purchase" @submit="" />
+      <Form v-if="purchase" :purchase="purchase" @submit="updatePurchase(purchase.id, $event)" />
     </div>
   </div>
 </template>

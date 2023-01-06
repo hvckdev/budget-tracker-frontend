@@ -34,6 +34,12 @@ onMounted(() => {
   formLoaded.value = true;
 });
 
+const removeProduct = () => {
+  delete data.products[productsCount.value];
+
+  productsCount.value--;
+};
+
 </script>
 
 <template>
@@ -77,7 +83,7 @@ onMounted(() => {
       <div class="py-2">
         <div class="btn-group">
           <button class="btn btn-success" @click="productsCount++">+</button>
-          <button v-if="productsCount > 1" class="btn btn-danger" @click="productsCount--">-</button>
+          <button v-if="productsCount > 1" class="btn btn-danger" @click="removeProduct">-</button>
         </div>
       </div>
 

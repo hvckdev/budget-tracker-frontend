@@ -40,10 +40,22 @@ export default function usePurchases() {
     return data;
   };
 
+  const updatePurchase = async (purchase, data) => {
+    $api(`purchase/${purchase}`, {
+      method: 'put',
+      body: data,
+    });
+
+    toast.success('Successfully updated purchase! 👜');
+
+    navigateTo('/purchases');
+  };
+
   return {
     getPurchases,
     storePurchase,
     destroyPurchase,
     getPurchase,
+    updatePurchase,
   };
 }

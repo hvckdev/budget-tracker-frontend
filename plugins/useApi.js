@@ -5,7 +5,6 @@ import { useToast } from 'vue-toastification';
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig();
   const token = useCookie('token');
-  const toast = useToast();
 
   const config = {
     baseURL: `${runtimeConfig.public.apiBase}/api/`,
@@ -25,9 +24,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (response.status === 404) {
         throw createError(
             { statusCode: 404, statusMessage: 'Page not found.' });
-      }
-      if (response.status === 422) {
-        toast.warning(response.body.detail);
       }
     },
   };
