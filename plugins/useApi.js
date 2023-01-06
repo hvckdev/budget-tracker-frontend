@@ -7,7 +7,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const token = useCookie('token');
 
   const config = {
-    baseURL: `${runtimeConfig.public.apiBase}/api/`,
+    baseURL: `${runtimeConfig.public.apiBase}/api/v1/`,
     headers: {}, // breaks
     onRequest({ options }) {
       options.headers.Accept = 'application/json';
