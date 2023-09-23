@@ -1,42 +1,31 @@
-# Nuxt 3 Minimal Starter
+# Budget Tracker UI by hvck 
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is Frontend App for my [budget tracker backend](https://github.com/hvckdev/budget-tracker-frontend). This is pretty simple and minimal. Hope u enjoy.
 
-## Setup
+![image 1](.github/img1.png)
+![image 1](.github/img2.png)
 
-Make sure to install the dependencies:
+## Requirements
+- Node 18 (early versions not tested) or Docker
+- [Backend App](https://github.com/hvckdev/budget-tracker-frontend)
 
-```bash
-# yarn
-yarn install
+## Deploy by yourself 
+Configure `NUXT_PUBLIC_API_BASE=` in `.env`. Just set base url to [Backend App](https://github.com/hvckdev/budget-tracker-frontend).
 
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
+Then u can:
 
 ```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
+npm ci && 
 npm run build
 ```
 
-Locally preview production build:
+or
 
 ```bash
-npm run preview
+npm ci && 
+npm run dev
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+for development.
+
+Have a nice day. 💖

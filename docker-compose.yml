@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  node:
+    image: node:18.13.0-alpine3.17
+    volumes:
+      - ./:/usr/src/budget-tracker-frontend
+    build:
+      context: .docker/node
+    working_dir: /usr/src/budget-tracker-frontend
+    command:
+      - npm run build
+    ports:
+      - "${NUXT_PORT}"
